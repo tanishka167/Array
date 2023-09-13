@@ -1,0 +1,34 @@
+#function to search an index of an item in rotated sorted array
+
+class Solution {
+    public int search(int[] nums, int target) {
+        int low=0;
+        int high=nums.length-1;
+        int mid;
+        while(low<=high){
+            mid=low+(high-low)/2;
+            if(nums[mid]==target){
+                return mid;
+            }
+            if(nums[low] <= nums[mid])                                            # given array is sorted in left of mid element
+            {                
+            if(nums[low]<=target && target<=nums[mid]) {
+                high=mid-1;
+            }
+                else{
+                    low=mid+1;
+                }
+            }
+            else                                                                 # given array is sorted in right of mid element 
+              {
+                if(nums[mid]<=target && target<=nums[high]){
+                    low=mid+1;
+                }
+                else{
+                    high=mid-1;
+                }
+            }
+        }
+        return -1;
+    }
+}
